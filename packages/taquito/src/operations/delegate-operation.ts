@@ -1,4 +1,4 @@
-import { OperationContentsAndResult, OperationContentsAndResultDelegation } from '@taquito/rpc';
+import { OperationContentsAndResult, OperationContentsAndResultDelegation, OperationResultDelegation, TezosGenericOperationError } from '@taquito/rpc';
 import { Context } from '../context';
 import { Operation } from './operations';
 import {
@@ -27,7 +27,7 @@ export class DelegateOperation extends Operation
     super(hash, raw, results, context);
   }
 
-  get operationResults() {
+  get operationResults(): OperationResultDelegation | undefined {
     const delegationOp =
       Array.isArray(this.results) &&
       (this.results.find(op => op.kind === 'delegation') as OperationContentsAndResultDelegation);
@@ -69,7 +69,7 @@ export class DelegateOperation extends Operation
     return consumedGas ? consumedGas : undefined;
   }
 
-  get errors() {
+  get errors(): TezosGenericOperationError[] | undefined {
     return this.operationResults && this.operationResults.errors;
   }
 }

@@ -275,10 +275,10 @@ export class RpcClient {
   async getBigMapExpr(
     id: string,
     expr: string,
-    { block }: { block: string } = defaultRPCOptions
+    block?: { block: string }
   ): Promise<BigMapResponse> {
     return this.httpBackend.createRequest<BigMapResponse>({
-      url: this.createURL(`/chains/${this.chain}/blocks/${block}/context/big_maps/${id}/${expr}`),
+      url: this.createURL(`/chains/${this.chain}/blocks/${block ? block.block : defaultRPCOptions.block}/context/big_maps/${id}/${expr}`),
       method: 'GET',
     });
   }
@@ -344,11 +344,11 @@ export class RpcClient {
       'block_security_deposit',
       'endorsement_security_deposit',
       'block_reward',
-      'endorsement_reward', 
+      'endorsement_reward',
       'cost_per_byte',
       'hard_storage_limit_per_operation',
       'test_chain_duration',
-      'baking_reward_per_endorsement', 
+      'baking_reward_per_endorsement',
       'delay_per_missing_endorsement'
     ]);
 

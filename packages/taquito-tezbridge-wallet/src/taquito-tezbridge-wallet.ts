@@ -7,6 +7,7 @@ import {
   WalletProvider,
   WalletTransferParams,
 } from '@taquito/taquito';
+import { RPCDelegateOperation, RPCOriginationOperation, RPCTransferOperation } from '../../taquito/src/operations/types';
 
 declare var tezbridge: any;
 
@@ -41,15 +42,15 @@ export class TezBridgeWallet implements WalletProvider {
     });
   }
 
-  mapTransferParamsToWalletParams(params: WalletTransferParams) {
+  mapTransferParamsToWalletParams(params: WalletTransferParams): Promise<RPCTransferOperation> {
     return createTransferOperation(params);
   }
 
-  mapOriginateParamsToWalletParams(params: WalletOriginateParams) {
+  mapOriginateParamsToWalletParams(params: WalletOriginateParams): Promise<RPCOriginationOperation> {
     return createOriginationOperation(params as any);
   }
 
-  mapDelegateParamsToWalletParams(params: WalletDelegateParams) {
+  mapDelegateParamsToWalletParams(params: WalletDelegateParams): Promise<RPCDelegateOperation> {
     return createSetDelegateOperation(params as any);
   }
 

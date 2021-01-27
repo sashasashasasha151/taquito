@@ -4,6 +4,7 @@ import {
   OperationContents,
   OperationContentsAndResult,
   OpKind,
+  PreapplyResponse,
   RpcClient,
   RPCRunOperationParam,
 } from '@taquito/rpc';
@@ -39,7 +40,7 @@ export abstract class OperationEmitter {
     return this.context.signer;
   }
 
-  constructor(protected context: Context) {}
+  constructor(protected context: Context) { }
 
   // Originally from sotez (Copyright (c) 2018 Andrew Kishino)
   protected async prepareOperation({
@@ -211,7 +212,11 @@ export abstract class OperationEmitter {
     };
   }
 
-  protected async simulate(op: RPCRunOperationParam) {
+  protected async simulate(op: RPCRunOperationParam): Promise<{
+    opResponse: PreapplyResponse;
+    op: RPCRunOperationParam;
+    context: Context;
+  }> {
     return {
       opResponse: await this.rpc.runOperation(op),
       op,
