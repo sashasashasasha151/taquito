@@ -96,13 +96,13 @@ export class RpcContractProvider extends OperationEmitter implements ContractPro
    *
    * @see https://tezos.gitlab.io/api/rpc.html#get-block-id-context-big-maps-big-map-id-script-expr
    */
-  async getBigMapKeyByID<T>(id: string, keyToEncode: string, schema: Schema): Promise<T> {
+  async getBigMapKeyByID<T>(id: string, keyToEncode: string, schema: Schema, block?: { block: string }): Promise<T> {
     const { key, type } = schema.EncodeBigMapKey(keyToEncode);
     const { packed } = await this.context.rpc.packData({ data: key, type });
 
     const encodedExpr = encodeExpr(packed);
 
-    const bigMapValue = await this.context.rpc.getBigMapExpr(id.toString(), encodedExpr);
+    const bigMapValue = await this.context.rpc.getBigMapExpr(id.toString(), encodedExpr, block);
 
     return schema.ExecuteOnBigMapValue(bigMapValue, smartContractAbstractionSemantic(this)) as T;
   }
