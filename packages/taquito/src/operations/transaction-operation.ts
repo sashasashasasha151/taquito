@@ -1,4 +1,4 @@
-import { OperationContentsAndResult, OperationContentsAndResultTransaction } from '@taquito/rpc';
+import { OperationContentsAndResult, OperationContentsAndResultTransaction, TezosGenericOperationError } from '@taquito/rpc';
 import BigNumber from 'bignumber.js';
 import { Context } from '../context';
 import { flattenErrors, flattenOperationResult } from './operation-errors';
@@ -93,7 +93,7 @@ export class TransactionOperation extends Operation
     );
   }
 
-  get errors() {
+  get errors(): TezosGenericOperationError[] {
     return flattenErrors({ contents: this.operationResults });
   }
 }

@@ -2,6 +2,7 @@ import {
   OperationContentsAndResult,
   OperationResultOrigination,
   OperationContentsAndResultOrigination,
+  TezosGenericOperationError,
 } from '@taquito/rpc';
 import { Context } from '../context';
 import { RpcContractProvider } from '../contract/rpc-contract-provider';
@@ -93,7 +94,7 @@ export class OriginationOperation extends Operation
     return storageSize ? storageSize : undefined;
   }
 
-  get errors() {
+  get errors(): TezosGenericOperationError[] | undefined {
     return this.operationResults && this.operationResults.errors;
   }
 
