@@ -1,4 +1,4 @@
-import { OperationContentsAndResult, OperationResultStatusEnum } from '@taquito/rpc';
+import { OperationContentsAndResult, OperationResultStatusEnum, TezosGenericOperationError } from '@taquito/rpc';
 import { BATCH_KINDS } from '../batch/rpc-batch-provider';
 import { Context } from '../context';
 import { flattenErrors, flattenOperationResult } from './operation-errors';
@@ -68,7 +68,7 @@ export class BatchOperation extends Operation
     );
   }
 
-  get errors() {
+  get errors(): TezosGenericOperationError[] {
     return flattenErrors({ contents: this.results });
   }
 }
