@@ -94,7 +94,7 @@ export interface StorageProvider {
    *
    * @see https://tezos.gitlab.io/api/rpc.html#get-block-id-context-big-maps-big-map-id-script-expr
    */
-  getBigMapKeyByID<T>(id: string, keyToEncode: string, schema: Schema): Promise<T>;
+  getBigMapKeyByID<T>(id: string, keyToEncode: string, schema: Schema, block?: { block: string }): Promise<T>;
 }
 
 export interface ContractProvider extends StorageProvider {
