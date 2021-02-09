@@ -1,6 +1,7 @@
 import {
   OperationContentsAndResult,
   OperationContentsAndResultOrigination,
+  OperationResultOrigination,
   TezosGenericOperationError,
 } from '@taquito/rpc';
 import { Context } from '../context';
@@ -52,7 +53,7 @@ export class OriginationOperation extends Operation
     }
   }
 
-  get operationResults() {
+  get operationResults(): OperationResultOrigination | undefined {
     const originationOp =
       Array.isArray(this.results) &&
       (this.results.find(op => op.kind === 'origination') as
