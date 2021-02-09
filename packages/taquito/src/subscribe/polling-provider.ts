@@ -1,4 +1,4 @@
-import { BlockResponse, OperationEntry } from '@taquito/rpc';
+import { BlockResponse } from '@taquito/rpc';
 import { from, Observable, ObservableInput, timer } from 'rxjs';
 import {
   concatMap,
@@ -25,8 +25,8 @@ const applyFilter = (filter: Filter) =>
       for (const ops of block.operations) {
         for (const op of ops) {
           for (const content of op.contents) {
-            if (evaluateFilter({hash: op.hash, ...content}, filter)) {
-              sub.next({hash: op.hash, ...content});
+            if (evaluateFilter({ hash: op.hash, ...content }, filter)) {
+              sub.next({ hash: op.hash, ...content });
             }
           }
         }
@@ -44,7 +44,7 @@ export class PollingSubscribeProvider implements SubscribeProvider {
     refCount()
   );
 
-  constructor(private context: Context, public readonly POLL_INTERVAL = 20000) {}
+  constructor(private context: Context, public readonly POLL_INTERVAL = 20000) { }
 
   subscribe(_filter: 'head'): Subscription<string> {
     return new ObservableSubscription(this.newBlock$.pipe(pluck('hash')), this.context.config.shouldObservableSubscriptionRetry);

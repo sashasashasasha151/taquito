@@ -61,6 +61,7 @@ export class WalletOperation {
           }
         }
       }
+      return;
     }),
     filter<BlockResponse | undefined, BlockResponse>((x): x is BlockResponse => {
       return typeof x !== 'undefined';

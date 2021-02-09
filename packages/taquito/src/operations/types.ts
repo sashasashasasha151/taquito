@@ -30,6 +30,8 @@ export const findWithKind = <T extends { kind: OpKind }, K extends OpKind>(
       return found;
     }
   }
+
+  return;
 };
 
 export const isKind = <T extends { kind: OpKind }, K extends OpKind>(

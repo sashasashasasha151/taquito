@@ -1,7 +1,6 @@
 import {
   BlockResponse,
   OperationContentsAndResult,
-  OperationResultStatusEnum,
   OperationContentsAndResultReveal,
 } from '@taquito/rpc';
 import { defer, from, ReplaySubject, timer } from 'rxjs';
@@ -86,6 +85,8 @@ export class Operation {
       if (head.header.level - this._foundAt >= 0) {
         return this._foundAt;
       }
+
+      return;
     }),
     filter(x => x !== undefined),
     first(),

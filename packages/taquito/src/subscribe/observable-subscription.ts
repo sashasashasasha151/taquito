@@ -1,4 +1,4 @@
-import { Observable, Subscription as RXJSSubscription, Subject, of, NEVER } from 'rxjs';
+import { Observable, Subject, NEVER } from 'rxjs';
 import { Subscription } from './interface';
 import { takeUntil, tap, retry, catchError } from 'rxjs/operators';
 

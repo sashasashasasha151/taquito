@@ -1,6 +1,5 @@
 import {
   OperationContentsAndResult,
-  OperationResultOrigination,
   OperationContentsAndResultOrigination,
   TezosGenericOperationError,
 } from '@taquito/rpc';

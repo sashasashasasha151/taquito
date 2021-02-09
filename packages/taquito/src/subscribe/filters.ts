@@ -30,7 +30,7 @@ const destinationFilter = (x: OperationContent, filter: DestinationFilter) => {
           contract => contract === filter.destination
         );
       }
-      break;
+      return;
     case 'transaction':
       return x.destination === filter.destination;
     default:
