@@ -24,7 +24,6 @@ import {
   createSetDelegateOperation,
   createTransferOperation,
 } from './prepare';
-import { Protocols } from '../constants'
 
 interface Limits {
   fee?: number;
@@ -155,9 +154,9 @@ export class RPCEstimateProvider extends OperationEmitter implements EstimationP
     const DEFAULT_PARAMS = await this.getAccountLimits(pkh);
     const op = await createOriginationOperation(
       await this.context.parser.prepareCodeOrigination({
-      ...rest,
-      ...mergeLimits({ fee, storageLimit, gasLimit }, DEFAULT_PARAMS),
-    }));
+        ...rest,
+        ...mergeLimits({ fee, storageLimit, gasLimit }, DEFAULT_PARAMS),
+      }));
     return (await this.createEstimate({ operation: op, source: pkh }))[0];
   }
   /**

@@ -12,7 +12,6 @@ import {
   RegisterDelegateParams,
   TransferParams,
 } from '../operations/types';
-import { Wallet } from '../wallet';
 import { ContractAbstraction } from './contract';
 import { InvalidDelegationSource } from './errors';
 import { ContractProvider, ContractSchema, EstimationProvider, StorageProvider } from './interface';
@@ -126,9 +125,9 @@ export class RpcContractProvider extends OperationEmitter
     const publicKeyHash = await this.signer.publicKeyHash();
     const operation = await createOriginationOperation(
       await this.context.parser.prepareCodeOrigination({
-      ...params,
-      ...estimate,
-    }));
+        ...params,
+        ...estimate,
+      }));
     const preparedOrigination = await this.prepareOperation({ operation, source: publicKeyHash });
     const forgedOrigination = await this.forge(preparedOrigination);
     const { hash, context, forgedBytes, opResponse } = await this.signAndInject(forgedOrigination);
